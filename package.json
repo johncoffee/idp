@@ -1,0 +1,23 @@
+{
+  "name": "hax",
+  "version": "1.0.0",
+  "description": "...",
+  "repository": "none",
+  "scripts": {
+    "ts-compile": "node node_modules/typescript/bin/tsc -p ./tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "@types/node": "^8.0.25",
+    "angular": "^1.6.1",
+    "angular-animate": "^1.6.1",
+    "angular-aria": "^1.6.1",
+    "angular-material": "^1.1.4",
+    "console.table": "^0.9.1",
+    "express": "^4.15.4",
+    "typescript": "^2.4.2"
+  }
+}

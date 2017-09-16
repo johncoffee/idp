@@ -1,4 +1,5 @@
 export enum Routes {
   FORM = 1,
-  CASES,
+  CASES = 2,
+  CREATE = 3,
 }

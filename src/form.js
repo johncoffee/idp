@@ -1,7 +1,7 @@
 angular.module('app').component('createForm', {
     template: `
 <md-content layout-padding>
-    <h2>KYC data - customer <span ng-bind="data.id"></span> </h2>
+    <h2>Customer <span ng-bind="data.id"></span> </h2>
     <p>Information received <b ng-bind="data.date"></b></p>
 </md-content>
 
@@ -50,7 +50,7 @@ angular.module('app').component('createForm', {
 
 <md-content>
   <p>
-      <md-button ng-click="$ctrl.print()" class="md-raised">Print as PDF</md-button>
+      <md-button ng-click="$ctrl.print()" class="md-raised">Save report to cloud</md-button>
   </p>
 </md-content>
 
@@ -87,8 +87,7 @@ angular.module('app').component('createForm', {
                 .catch(error => console.warn(error))
         }
 
-        setTimeout(()=>{        this.getLatestResponse()
-        },1)
+        setTimeout(()=>{this.getLatestResponse()},1)
 
         this.lookupCvr = (newVal) => {
             console.debug(`lookup cvr...`)

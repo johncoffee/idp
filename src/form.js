@@ -40,7 +40,7 @@ angular.module('app').component('createForm', {
             <!--</md-card-title>-->
                 <md-card-content>
                   <p>
-                      User-uploaded image.
+                      Photo ID
                   </p>
             </md-card-content>       
         </md-card>

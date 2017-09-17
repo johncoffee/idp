@@ -10,7 +10,7 @@ angular.module("app").config(function ($mdThemingProvider, $locationProvider) {
 
 angular.module('app').component('plankApp', {
   template: `
-<div style="background: #C62828; color: #fff;" layout="row" layout-padding layout-align="center center">
+<div style="background: #75436e; color: #fff;" layout="row" layout-padding layout-align="center center">
     <h3 flex="grow">APP</h3>
     <div style="white-space: nowrap;">
       <md-button ng-click="$ctrl.route = ${Routes.CREATE}">create</md-button>
@@ -76,7 +76,7 @@ angular.module('app').component('createCase', {
     const types = $scope.types = [
         {title: "DAWA address", img: "", },
         {title: "CVR number", img: "", },
-        {title: "Image upload", img: "", },
+        {title: "Photo ID upload", img: "", },
         {title: "Motorregistret", img: "", },
         {title: "NemID", img: "", },
         {title: "Facebook", img: "", },

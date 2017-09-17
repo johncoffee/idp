@@ -76,9 +76,8 @@ angular.module('app').component('createForm', {
                         console.debug(json.responses)
                         if (json.responses instanceof Array && json.responses.length > 0) {
                             const latest = json.responses[json.responses.length-1]
-
                             console.debug(latest)
-                            data.image = latest.answers.fileupload_61070177
+                            data.image = latest.answers.fileupload_61070577
                             data.cvr = parseInt(latest.answers.textfield_61074806, 10)
                             this.lookupCvr(data.cvr)
                         }
@@ -90,13 +89,12 @@ angular.module('app').component('createForm', {
         setTimeout(()=>{this.getLatestResponse()},1)
 
         this.lookupCvr = (newVal) => {
-            console.debug(`lookup cvr...`)
             fetch(`https://cvrapi.dk/api?search=${newVal}&country=dk`)
                 .then(res => res.json(),
                       reason => console.warn(reason)
                 )
                 .then(json => { processCvrData(json) })
-                .catch(error => console.warn(error))
+                .catch(error => console.error(error))
         }
 
         function processCvrData (apiData) {
@@ -104,8 +102,8 @@ angular.module('app').component('createForm', {
             $scope.$apply(() => {
                 if (apiData.owners instanceof Array) {
                     data.owners = apiData.owners.map(owner => owner.name).join(", ")
-                    console.log(data)
                 }
+                console.log(data)
             })
         }
 

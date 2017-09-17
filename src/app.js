@@ -36,41 +36,46 @@ angular.module('app').component('plankApp', {
 angular.module('app').component('createCase', {
   template: `
   <md-content layout-padding>
-      <h2>Build KYC form</h2>
-        
-      <p>        
-        Elements: <md-button ng-repeat="typ in types" 
-                             ng-click="$ctrl.add(typ)" ng-bind="typ"></md-button>
-      </p>
-        
-      <ol style="margin-left: 2rem">
-        <li ng-repeat="item in list" 
-            ng-bind="::item.title" ng-click="$ctrl.doStuff()"></li>
-      </ol>
+      <h2>Build form; select validators</h2>                               
+      <md-content layout-padding>
+        <md-grid-list
+            md-cols-gt-md="12" md-cols="3" md-cols-md="8"
+            md-row-height="1:1"
+            md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px">
+          <md-grid-tile
+              ng-repeat="tile in types"
+              ng-style="{'background': tile.selected ? '#A4FFA7' : '#FFC8BF'}"              
+              ng-click="tile.selected = !tile.selected">
+              <span ng-bind="::tile.title" style="font-weight: bold"></span>
+          </md-grid-tile>
+        </md-grid-list>
+      </md-content>
       
-      <p><md-button>save</md-button></p>   
-</md-content>
+      <h3>Requirements</h3>      
+      <p ng-show="">Client has to provide</p>
+      <p>Client has to provide</p>
+      
+      <input type="number" ng-model="$ctrl.mustSelect"> (of {{ $ctrl.getSelected(types) }})
+         
+      <p style="text-align: right">
+        <md-button class="md-primary md-raised" ng-click="$ctrl.save()">save</md-button>       
+      </p>   
+</md-content>     
     
 `,
   controller: function ($scope) {
     const list = $scope.list = []
-    const types = $scope.types = ["dawa","cvr","image upload"]
-
-      this.add = (element) => {
-        let el = {}
-        list.push(el)
-        switch (element) {
-            case "dawa":
-              el.title = "Dawa address lookup"
-              break;
-            case "cvr":
-              el.title = "CVR number lookup in Virk"
-              break;
-            case "image upload":
-              el.title = "Image upload"
-              break;
-        }
-      }
+    const types = $scope.types = [
+        {title: "DAWA address", img: "", },
+        {title: "CVR number", img: "", },
+        {title: "Image upload", img: "", },
+        {title: "Motorregistret", img: "", },
+        {title: "NemID", img: "", },
+        {title: "Facebook", img: "", },
+    ]
+    this.mustSelect = 2
+    this.getSelected = (list) => list.filter(i => !!i.selected).length
+    this.save = () => sessionStorage.route = Routes.CASES
 
   },
 })
@@ -78,7 +83,7 @@ angular.module('app').component('createCase', {
 angular.module('app').component('casesList', {
   template: `
     <md-content layout-padding>
-        <h2>KYC case list</h2>
+        <h2>Case list</h2>
         <div ng-repeat="item in list">
             <div ng-bind="::item.title" ng-click="$ctrl.doStuff()">           
             </div>              
@@ -90,11 +95,11 @@ angular.module('app').component('casesList', {
     const list = $scope.list = []
 
     list.push({
-        title: "KYC data #1 - received"
+        title: "Case data #1 - received"
       },{
-        title: "KYC data #2 - received"
+        title: "Case data #2 - received"
       },{
-        title: "KYC data #3 - pending"
+        title: "Case data #3 - pending"
       },
     )
 

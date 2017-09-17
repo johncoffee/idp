@@ -1,9 +1,11 @@
 angular.module("app", ['ngMaterial'])
 
-angular.module("app").config(function ($mdThemingProvider) {
+angular.module("app").config(function ($mdThemingProvider, $locationProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('red')
     .accentPalette('blue')
+
+    $locationProvider.html5Mode(true)
 })
 
 angular.module('app').component('plankApp', {
@@ -20,7 +22,13 @@ angular.module('app').component('plankApp', {
     <cases-list ng-if="$ctrl.route == ${Routes.CASES}"></cases-list>
     <create-case ng-if="$ctrl.route == ${Routes.CREATE}"></create-case>
 `,
-  controller: function () {
+  controller: function ($location) {
+      const searchObject = $location.search()
+      if (searchObject.apikey) {
+          sessionStorage.apikey = searchObject.apikey
+          $location.search("apikey", '')
+      }
+
     Object.defineProperty(this, 'route', {
       get: () => sessionStorage.route,
       set: (value) => sessionStorage.route = value,
